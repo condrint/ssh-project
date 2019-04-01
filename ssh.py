@@ -3,17 +3,23 @@ import time
 import select
 import paramiko
 
+class SSH():
+    def __init__(self, host, username=None, password=None):
+        self.ssh = paramiko.SSHClient()
+        self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
 
+        if username and password: 
+            ssh.connect(host, username=username, password=password)
+        else:
+            ssh.connect(host)
+
+    def sendCommand(self, command):
+        pass
+        
 # prompt user for these 
 host = 'login.unx.csupomona.edu'
 username = 'tjcondrin'
 password = ''
-
-# run these when connect is hit
-ssh = paramiko.SSHClient()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
-ssh.connect(host, username=username, password=password)
-print ("Connected to %s" % host)
 
 
 """
