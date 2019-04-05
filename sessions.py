@@ -1,5 +1,3 @@
-import base64
-
 class Sessions():
     def __init__(self):
         self.key = 'asdfasdf'
@@ -9,7 +7,7 @@ class Sessions():
         saves a session
         returns true if successful
         """ 
-        file = open('sessions.txt', 'a')
+        file = open('sessions.txt', 'a', encoding='latin-1')
         file.write('%s,%s,%s\n' % (self._encode(host), self._encode(username), self._encode(password)))
         file.close()
     
@@ -20,9 +18,11 @@ class Sessions():
         host, username, password
         """
         sessions = []
-        file = open('sessions.txt', 'r')
+        file = open('sessions.txt', 'r', encoding='latin-1')
 
         for line in file:
+            if not line.strip():
+                continue
             host, username, password = line.strip().split(',')
             sessions.append(tuple([self._decode(host), self._decode(username), self._decode(password)]))
 
@@ -50,7 +50,8 @@ class Sessions():
             encoded_chars.append(encoded_c)
         encoded_string = "".join(encoded_chars)
         return encoded_string
-
+"""
 s = Sessions()
 s.storeSession('hi','how','are')
 print(s.getSessions())
+"""
