@@ -11,12 +11,13 @@ def openTerminal(ssh):
     window.destroy()
 
     def sendCommand():
-            command = terminalInput.get()
-            terminalInput.delete(0, END)
-            
-            output = ssh.sendCommand(command)
-            print(output)
-            text1.insert(1.0, '\n' + output)
+        command = terminalInput.get()
+        terminalInput.delete(0, END)
+
+        output = ssh.sendCommand(command)
+        text1.config(state=NORMAL)
+        text1.insert(END, '\n' + output)
+        text1.config(state=DISABLED)
 
     terminal = Tk()
     terminal.title('Terminal')
@@ -30,7 +31,7 @@ def openTerminal(ssh):
     terminalButton = Button(terminal, text='Send', command=sendCommand)
     terminalButton.grid(row=1, column=1)
 
-
+    terminal.bind('<Return>', sendCommand)
     terminal.mainloop()
 
 def connect():

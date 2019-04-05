@@ -18,9 +18,9 @@ class SSH():
 
         error = stderr.read()
         if error:
-            return 'Error: ' + str(error)
+            return 'Error: ' + error.decode("utf-8") 
         else:
-            return str(stdout.read())
+            return stdout.read().decode("utf-8") 
 """       
 # prompt user for these 
 host = 'login.unx.csupomona.edu'
