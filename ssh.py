@@ -21,14 +21,3 @@ class SSH():
             return 'Error: ' + error.decode("utf-8") 
         else:
             return stdout.read().decode("utf-8") 
-"""       
-# prompt user for these 
-host = 'login.unx.csupomona.edu'
-username = 'tjcondrin'
-password = ''
-
-ssh = SSH(host, username, password)
-cmd = input('enter command')
-ssh.sendCommand(cmd)
-"""
-

@@ -50,8 +50,3 @@ class Sessions():
             encoded_chars.append(encoded_c)
         encoded_string = "".join(encoded_chars)
         return encoded_string
-"""
-s = Sessions()
-s.storeSession('hi','how','are')
-print(s.getSessions())
-"""
