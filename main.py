@@ -16,20 +16,22 @@ def openTerminal(ssh):
 
         output = ssh.sendCommand(command)
         text1.config(state=NORMAL)
-        text1.insert(END, '\n' + output)
+        text1.insert(END, '> ' + output)
         text1.config(state=DISABLED)
+        text1.yview(END)
 
     terminal = Tk()
+    terminal.geometry('600x415')
     terminal.title('Terminal')
     
     text1 = Text(master=terminal, state=DISABLED)
     text1.grid(row=0)
 
     terminalInput = Entry(terminal)
-    terminalInput.grid(row=1, column=0)
+    terminalInput.place(x=10, y=390, width=500)
 
     terminalButton = Button(terminal, text='Send', command=sendCommand)
-    terminalButton.grid(row=1, column=1)
+    terminalButton.place(x=515, y=389, width=60)
 
     terminal.bind('<Return>', sendCommand)
     terminal.mainloop()
@@ -78,31 +80,33 @@ def refreshWindow():
 
 window = Tk()
 window.title('SSH')
+window.geometry("450x550")
 
 hostLabel = Label(window, text="Host")
-hostLabel.grid(row=0)
+hostLabel.grid(row=0, padx=215, pady=3)
+
 hostInput = Entry(window)
-hostInput.grid(row=1)
+hostInput.grid(row=1, pady=3)
 
 usernameLabel = Label(window, text="Username")
-usernameLabel.grid(row=2)
+usernameLabel.grid(row=2, pady=3)
 usernameInput = Entry(window)
-usernameInput.grid(row=3)
+usernameInput.grid(row=3, pady=3)
 
 passwordLabel = Label(window, text="Password")
-passwordLabel.grid(row=4)
+passwordLabel.grid(row=4, pady=3)
 passwordInput = Entry(window, show='*')
-passwordInput.grid(row=5)
+passwordInput.grid(row=5, pady=3)
 
-connectButton = Button(window, text="CONNECT", command=connect).grid(row=6, column=0)
-saveSession = Button(window, text="SAVE", command=saveSession).grid(row=6, column=1)
+connectButton = Button(window, text="CONNECT", command=connect, width=10).grid(row=6, pady=3)
+saveSession = Button(window, text="SAVE", command=saveSession, width=10).grid(row=7, pady=3)
 
-Label(window, text="Saved Sessions").grid(row=7)
+Label(window, text="Saved Sessions").grid(row=8, pady=(10, 0))
 text = Text(master=window)
 scroll =Scrollbar(window, orient=VERTICAL, command=text.yview)
-scroll.grid(row=8, column=2, sticky=NS)
-text.grid(row=8, column=1, sticky=W)
-text.config(yscrollcommand=scroll.set,font=('Arial', 8, 'bold', 'italic'))
+scroll.place(x=430, y=250, height=280)
+text.place(x=10, y=250, height=280, width=430)
+text.config(yscrollcommand=scroll.set, font=('Arial', 11, 'bold', 'italic'))
 
 refreshWindow()
 window.mainloop()
